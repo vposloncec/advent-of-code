@@ -25,7 +25,7 @@ func TestSafe(t *testing.T) {
 		{
 			name:  "actual",
 			input: input,
-			want:  472,
+			want:  520,
 		},
 	}
 	for _, tt := range tests {
