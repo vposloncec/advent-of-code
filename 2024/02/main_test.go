@@ -25,7 +25,7 @@ func TestSafe(t *testing.T) {
 		{
 			name:  "actual",
 			input: input,
-			want:  520,
+			want:  472,
 		},
 	}
 	for _, tt := range tests {
@@ -51,7 +51,7 @@ func TestSafeDampened(t *testing.T) {
 		{
 			name:  "actual",
 			input: input,
-			want:  472,
+			want:  520,
 		},
 	}
 	for _, tt := range tests {
