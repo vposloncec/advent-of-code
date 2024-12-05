@@ -29,7 +29,7 @@ func TestSearch(t *testing.T) {
 		{
 			name:  "actual",
 			input: input,
-			want:  21,
+			want:  2517,
 		},
 	}
 	for _, tt := range tests {
@@ -56,7 +56,7 @@ func TestSearchX(t *testing.T) {
 		{
 			name:  "actual",
 			input: input,
-			want:  21,
+			want:  1960,
 		},
 	}
 	for _, tt := range tests {
