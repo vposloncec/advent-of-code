@@ -28,35 +28,63 @@ func (s Shirt) String() (res string) {
 	return strings.TrimSuffix(res, "\n")
 }
 
-func (s Shirt) search() int {
-
-	for i, line := range s.Matrix {
-		for j, char := range line {
+func (s Shirt) Search() int {
+	for x, line := range s.Matrix {
+		for y, char := range line {
 			if char == 'X' {
-				s.searchPos(i, j, "")
+				s.searchAllDirections(x, y, char)
 			}
 		}
 	}
 	return s.result
 }
 
-func (s Shirt) searchPos(x, y int, current string) {
-	if !isUsable(s.Matrix[x][y]) {
+func (s Shirt) SearchX() int {
+	for x, line := range s.Matrix {
+		for y, char := range line {
+			if char == 'A' {
+				if s.validDiagonalX(x, y, -1, -1) && s.validDiagonalX(x, y, -1, 1) {
+					s.result++
+				}
+			}
+		}
+	}
+	return s.result
+}
+
+func (s *Shirt) searchPos(x, y, directionx, directiony int, current string) {
+	if !s.isValid(x, y, current) {
 		return
 	}
 
-	if s.Matrix[x][y] == 'S' && current == "XMA" {
+	if done := current == "XMA" && s.Matrix[x][y] == 'S'; done {
 		s.result++
 		return
 	}
-	if s.Matrix[x][x] == 'X' {
 
-	}
-
+	s.searchPos(x+directionx, y+directiony, directionx, directiony, current+string(s.Matrix[x][y]))
 }
 
-func isUsable(char rune) bool {
-	return char == 'X' || char == 'M' || char == 'A' || char == 'S'
+func (s *Shirt) validDiagonalX(x, y, directionx, directiony int) bool {
+	firstOnDiag := s.Matrix[x+directionx][y+directiony]
+	secondOnDiag := s.Matrix[x-directionx][y-directiony]
+	if firstOnDiag == 'M' && secondOnDiag == 'S' {
+		return true
+	}
+	if firstOnDiag == 'S' && secondOnDiag == 'M' {
+		return true
+	}
+	return false
+}
+
+func (s Shirt) isValid(x, y int, current string) bool {
+	if s.Matrix[x][y] == 'X' && current == "" ||
+		s.Matrix[x][y] == 'M' && current == "X" ||
+		s.Matrix[x][y] == 'A' && current == "XM" ||
+		s.Matrix[x][y] == 'S' && current == "XMA" {
+		return true
+	}
+	return false
 }
 
 func addPadding(matrix [][]rune, padding rune) [][]rune {
@@ -78,6 +106,17 @@ func addPadding(matrix [][]rune, padding rune) [][]rune {
 		}
 	}
 	return newMatrix
+}
+
+func (s *Shirt) searchAllDirections(x, y int, char rune) {
+	for dirx := -1; dirx <= 1; dirx++ {
+		for diry := -1; diry <= 1; diry++ {
+			if dirx == 0 && diry == 0 {
+				continue
+			}
+			s.searchPos(x+dirx, y+diry, dirx, diry, string(char))
+		}
+	}
 }
 
 func prettify(input string) (res string) {
