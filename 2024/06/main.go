@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -138,7 +137,6 @@ func (l *Lab) guardWalkObstacle() {
 				newLab := l.newLabWithObstacle(newLocation)
 				if loop := newLab.guardWalk(); loop {
 					l.possibleNewObstacle[newLocation] = struct{}{}
-					fmt.Println("Possible new obstacle", newLocation.x, newLocation.y)
 				}
 			}
 
