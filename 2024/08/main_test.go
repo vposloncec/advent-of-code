@@ -36,7 +36,8 @@ func TestAntiNodes(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := FindAntiNodes(tt.input); got != tt.want {
+			f := NewAntiNodeFinder(tt.input)
+			if got := f.FindAntiNodes(); got != tt.want {
 				t.Errorf("calculate = %v\n\nwant: %v, map: \n", got, tt.want)
 			}
 		})
@@ -62,7 +63,8 @@ func TestMoreNodes(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := FindMoreAntiNodes(tt.input); got != tt.want {
+			f := NewAntiNodeFinder(tt.input)
+			if got := f.FindMoreAntiNodes(); got != tt.want {
 				t.Errorf("calculate = %v\n\nwant: %v, map: \n", got, tt.want)
 			}
 		})
