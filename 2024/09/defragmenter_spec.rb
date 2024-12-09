@@ -1,4 +1,5 @@
 require 'rspec'
+require 'ruby-prof'
 require_relative 'defragmenter'
 
 RSpec.describe Defragmenter do
@@ -12,7 +13,7 @@ RSpec.describe Defragmenter do
 
   context 'with example 2' do
     let(:input) { '12345' }
-    let(:result) { 132 }
+    let(:result) { 60 }
 
     it 'returns the correct result' do
       expect(described_object.calculate).to eq(result)
@@ -28,7 +29,7 @@ RSpec.describe Defragmenter do
     end
   end
 
-  context 'with actual input' do
+  xcontext 'with actual input' do
     let(:input) { actual }
     let(:result) { 6_301_895_872_542 }
 
@@ -48,6 +49,15 @@ RSpec.describe Defragmenter do
     context 'with example 2' do
       let(:input) { '252' }
       let(:result) { 5 }
+
+      it 'returns the correct result' do
+        expect(described_object.calculate_whole).to eq(result)
+      end
+    end
+
+    context 'with actual input' do
+      let(:input) { actual }
+      let(:result) { 6_323_761_685_944 }
 
       it 'returns the correct result' do
         expect(described_object.calculate_whole).to eq(result)

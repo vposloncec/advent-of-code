@@ -4,6 +4,8 @@ class Defragmenter
     @input = input
   end
 
+  Num = Struct.new(:val, :index)
+
   attr_reader :input, :representation, :defragmented, :checksum
 
   def calculate
@@ -42,28 +44,39 @@ class Defragmenter
   end
 
   def defragment_maintain_whole_file
-    defragmented = representation.dup
-    rchunked = defragmented.reverse.each_with_index.chunk_while { |(a, ai), (b, bi)| a == b }.to_a
-    ddefragmented = rchunked.each do |chunk, i|
-      next unless chunk[0].is_a?(Numeric)
+    defragmented = representation.each_with_index.map do |c, i|
+      Num.new(c, i)
+    end
+    defragmented.reverse.chunk_while { |a, b| a.val == b.val }.each do |chunk|
+      next unless chunk[0].val.is_a?(Numeric)
 
-      left_big_enough_dot_index = rchunked.rindex { |elem| elem.size >= chunk.size && elem.all? { |e| e == '.' } }
-      next if left_big_enough_dot_index.nil? || left_big_enough_dot_index < i
+      left_big_enough_dot_index = find_spaces(defragmented[0..chunk[-1].index], chunk.size)
+      next unless left_big_enough_dot_index
 
-      debugger
       chunk.size.times do |j|
-        rchunked[i][j], rchunked[left_big_enough_dot_index][j] = rchunked[left_big_enough_dot_index][j],
-rchunked[i][j]
+        defragmented[left_big_enough_dot_index + j].val, defragmented[chunk[-1].index + j].val =
+          defragmented[chunk[-1].index + j].val, defragmented[left_big_enough_dot_index + j].val
       end
     end
-    debugger
-    @defragmented = ddefragmented.reverse.flatten
+    @defragmented = defragmented
   end
 
   def calculate_checksum
     last_num = defragmented.rindex { |n| n.is_a?(Numeric) }
     @checksum = defragmented[0..last_num].each_with_index.sum do |c, i|
-      c.to_i * i
+      if c.is_a?(Num)
+        c.val.to_i * i
+      else
+        c.to_i * i
+      end
     end
+  end
+
+  def find_spaces(array, spaces)
+    array.each_cons(spaces) do |chunk|
+      return chunk[0].index if chunk.all? { |c| c.val == '.' }
+    end
+
+    nil
   end
 end
