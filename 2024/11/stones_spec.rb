@@ -1,4 +1,5 @@
 require 'rspec'
+require 'benchmark'
 require_relative 'stones'
 
 RSpec.describe Stones do
@@ -27,39 +28,22 @@ RSpec.describe Stones do
     let(:input) do
       '337 42493 1891760 351136 2 6932 73 0'
     end
-    let(:result) { 36 }
+    let(:result) { 277_444_936_413_293 }
 
     it 'returns the correct result' do
       expect(described_object.part2).to eq(result)
     end
   end
 
-  xcontext 'for part two' do
-    let(:described_object) { described_class.new(input) }
-    let(:result) { 2858 }
-
-    it 'returns the correct result' do
-      expect(described_object.calculate_whole).to eq(result)
-    end
-
-    context 'with example 2' do
-      let(:input) { '252' }
-      let(:result) { 5 }
-
-      it 'returns the correct result' do
-        expect(described_object.calculate_whole).to eq(result)
-      end
-    end
-
-    context 'with actual input' do
-      let(:input) { actual }
-      let(:result) { 6_323_761_685_944 }
-
-      it 'returns the correct result' do
-        expect(described_object.calculate_whole).to eq(result)
+  context 'benchmark 1000 times actual part2' do
+    it 'runs fast' do
+      Benchmark.bm do |x|
+        x.report('part2') { 10_000.times { described_object.part2 } }
+        x.report('part1') { 10_000.times { described_object.part1 } }
       end
     end
   end
+
   let(:actual) do
     <<~ACTUAL
       12340101878761023456545454342165345676769343212898101234
