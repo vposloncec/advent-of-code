@@ -37,39 +37,40 @@ RSpec.describe Topography do
 
   context 'with actual input' do
     let(:input) { actual }
-    let(:result) { 6_301_895_872_542 }
+    let(:result) { 694 }
 
     it 'returns the correct result' do
       expect(described_object.part1).to eq(result)
     end
   end
 
-  xcontext 'for part two' do
-    let(:described_object) { described_class.new(input) }
-    let(:result) { 2858 }
+  context 'for part two' do
+    let(:input) do
+      '89010123
+  78121874
+  87430965
+  96549874
+  45678903
+  32019012
+  01329801
+  10456732'
+    end
+    let(:result) { 81 }
 
     it 'returns the correct result' do
-      expect(described_object.calculate_whole).to eq(result)
+      expect(described_object.part2).to eq(result)
     end
 
-    context 'with example 2' do
-      let(:input) { '252' }
-      let(:result) { 5 }
-
-      it 'returns the correct result' do
-        expect(described_object.calculate_whole).to eq(result)
-      end
-    end
-
-    context 'with actual input' do
+    context 'with actual' do
       let(:input) { actual }
-      let(:result) { 6_323_761_685_944 }
+      let(:result) { 1497 }
 
       it 'returns the correct result' do
-        expect(described_object.calculate_whole).to eq(result)
+        expect(described_object.part2).to eq(result)
       end
     end
   end
+
   let(:actual) do
     <<~ACTUAL
       12340101878761023456545454342165345676769343212898101234

@@ -6,9 +6,12 @@ class Topography
   end
 
   def part1
-    p grid
     paths = grid.filter { |_k, v| v.zero? }.map { |k, _v| find_paths(k) }
-    sizes = paths.count { |start_paths| start_paths.size }
+    paths.sum { |start_paths| start_paths.each.size }
+  end
+
+  def part2
+    paths = grid.filter { |_k, v| v.zero? }.map { |k, _v| find_paths(k, rating: true) }
     paths.sum { |start_paths| start_paths.each.size }
   end
 
@@ -23,12 +26,11 @@ class Topography
     end
   end
 
-  def find_paths(start)
+  def find_paths(start, rating: false)
     queue = [start]
     paths = []
     while queue.any?
       current = queue.shift
-      puts "Current: #{current}, queue: #{queue}"
       if grid[current] == 9
         paths << current
         next
@@ -39,7 +41,7 @@ class Topography
         next if grid[neighbour] != grid[current] + 1
         # Don't go again in same spot
         next if paths.include?(neighbour)
-        next if queue.include?(neighbour)
+        next if queue.include?(neighbour) && !rating
 
         queue << neighbour
       end
