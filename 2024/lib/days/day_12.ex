@@ -75,7 +75,7 @@ defmodule Aoc.Days.Day12 do
         acc -> acc + borders[position]
       end
 
-    IO.puts("BN: #{border_number}, size: #{MapSet.size(area)}")
+    # IO.puts("BN: #{border_number}, size: #{MapSet.size(area)}")
 
     border_number * MapSet.size(area)
   end
