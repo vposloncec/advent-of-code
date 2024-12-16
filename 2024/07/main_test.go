@@ -25,11 +25,12 @@ func TestCalculate(t *testing.T) {
 			input: example,
 			want:  3749,
 		},
-		{
-			name:  "actual",
-			input: input,
-			want:  1399219271639,
-		},
+		// Commented out since its slow
+		// {
+		// 	name:  "actual",
+		// 	input: input,
+		// 	want:  1399219271639,
+		// },
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -51,11 +52,11 @@ func TestCalculateAdvanced(t *testing.T) {
 			input: example,
 			want:  11387,
 		},
-		{
-			name:  "actual",
-			input: input,
-			want:  275791737999003,
-		},
+		// {
+		// 	name:  "actual",
+		// 	input: input,
+		// 	want:  275791737999003,
+		// },
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

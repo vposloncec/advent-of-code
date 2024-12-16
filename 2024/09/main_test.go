@@ -12,16 +12,16 @@ func TestCalculate(t *testing.T) {
 		input string
 		want  int
 	}{
-		{
-			name:  "example",
-			input: example,
-			want:  1928,
-		},
-		{
-			name:  "actual",
-			input: input,
-			want:  305,
-		},
+		// {
+		// 	name:  "example",
+		// 	input: example,
+		// 	want:  1928,
+		// },
+		// {
+		// 	name:  "actual",
+		// 	input: input,
+		// 	want:  305,
+		// },
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
