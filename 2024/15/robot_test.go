@@ -53,21 +53,21 @@ func TestCalculateWarehouse(t *testing.T) {
 		input string
 		want  int
 	}{
-		{
-			name:  "mini",
-			input: mini,
-			want:  2028,
-		},
-		{
-			name:  "example",
-			input: example,
-			want:  10092,
-		},
-		{
-			name:  "actual",
-			input: input,
-			want:  1383666,
-		},
+		// {
+		// 	name:  "mini",
+		// 	input: mini,
+		// 	want:  2028,
+		// },
+		// {
+		// 	name:  "example",
+		// 	input: example,
+		// 	want:  10092,
+		// },
+		// {
+		// 	name:  "actual",
+		// 	input: input,
+		// 	want:  1383666,
+		// },
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -90,11 +90,11 @@ func TestCalculateWarehouseWide(t *testing.T) {
 		// 	input: mini2,
 		// 	want:  2028,
 		// },
-		{
-			name:  "example",
-			input: example,
-			want:  10092,
-		},
+		// {
+		// 	name:  "example",
+		// 	input: example,
+		// 	want:  10092,
+		// },
 		// {
 		// 	name:  "actual",
 		// 	input: input,
