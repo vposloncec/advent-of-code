@@ -12,18 +12,28 @@ defmodule Day17Test do
                 """
                 |> String.trim()
 
+  @test_example2 """
+  Register A: 2024
+  Register B: 0
+  Register C: 0
+
+  Program: 0,3,5,4,3,0
+  """
+
   test "calculates part1 example" do
-    assert @test_example |> Day17.part1() == 140
+    assert @test_example |> Day17.part1() == "4,6,3,5,6,3,5,2,1,0"
   end
 
-  @tag :skip
-  test "calculates part1 example 2" do
-    assert @test_example |> Day17.part1() == 1930
-  end
-
-  @tag :skip
   test "calculates part1 actual" do
-    assert test_actual() |> Day17.part1() == 1_473_276
+    assert test_actual() |> Day17.part1() == "1,5,0,5,2,0,1,3,5"
+  end
+
+  test "calculates part2 example" do
+    assert @test_example2 |> Day17.part2() == 117_440
+  end
+
+  test "calculates part2 actual" do
+    assert test_actual() |> Day17.part2() == 236_581_108_670_061
   end
 
   def test_actual do

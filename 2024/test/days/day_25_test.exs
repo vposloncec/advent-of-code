@@ -1,68 +1,66 @@
-defmodule Day22Test do
+defmodule Day25Test do
   use ExUnit.Case, async: true
 
-  alias Aoc.Days.Day22
+  alias Aoc.Days.Day25
 
   @test_example """
-                #####
-                .####
-                .####
-                .####
-                .#.#.
-                .#...
-                .....
+  #####
+  .####
+  .####
+  .####
+  .#.#.
+  .#...
+  .....
 
-                #####
-                ##.##
-                .#.##
-                ...##
-                ...#.
-                ...#.
-                .....
+  #####
+  ##.##
+  .#.##
+  ...##
+  ...#.
+  ...#.
+  .....
 
-                .....
-                #....
-                #....
-                #...#
-                #.#.#
-                #.###
-                #####
+  .....
+  #....
+  #....
+  #...#
+  #.#.#
+  #.###
+  #####
 
-                .....
-                .....
-                #.#..
-                ###..
-                ###.#
-                ###.#
-                #####
+  .....
+  .....
+  #.#..
+  ###..
+  ###.#
+  ###.#
+  #####
 
-                .....
-                .....
-                .....
-                #....
-                #.#..
-                #.#.#
-                #####
-                """
-                |> String.trim()
+  .....
+  .....
+  .....
+  #....
+  #.#..
+  #.#.#
+  #####
+  """
 
   test "calculates part1 example" do
-    assert @test_example |> Day22.part1() == 37_990_510
+    assert @test_example |> Day25.part1() == 3
   end
 
-  @tag :skip
   test "calculates part1 actual" do
-    assert test_actual() |> Day22.part1() == 16_299_144_133
+    assert test_actual() |> Day25.part1() == 16_299_144_133
   end
 
   @tag :skip
   test "calculates part2 example" do
-    assert @test_example |> Day22.part2() == 23
+    assert @test_example |> Day25.part2() == 23
   end
 
   @tag :skip
   test "calculates part2 actual" do
-    assert test_actual() |> Day22.part2() == 1896
+    assert test_actual() |> Day25.part2() == 1896
   end
 
   def test_actual do
